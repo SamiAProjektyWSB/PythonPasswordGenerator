@@ -8,3 +8,4 @@ pass_min_len = input("Min length: ")
 pass_upper = input("Do the password need to have uppercase letters?(y/n): ")
 pass_digit = input("Do the password need to contain numbers?(y/n): ")
 pass_special_character = input("Do the password need to contain special characters?(y/n): ")
+
