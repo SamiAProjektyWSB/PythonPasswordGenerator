@@ -8,18 +8,24 @@ class Password:
     digits = string.digits
     special_characters = string.punctuation
     def __init__(self, length: int, min_len: int, have_uppercase: str, have_num: str, have_special_character: str, result: str):
-        try:
-            assert length >= 0, f"Password length can't be negative"
-            assert min_len >= 0, f"Password minimal length can't be negative"
-            assert min_len <= length, f"Password minimal length can't be grater than password length"
-            assert len(have_uppercase) <= 1 and have_uppercase == "y" or have_uppercase == "n", f"Only y or n"
-            assert len(have_num) <= 1, f"Only y or n"
-            assert len(have_special_character) <= 1, f"Only y or n"
-            self.result = result
-        except:
-            print("Something is wrong... try rewiev your input information")
+        # Run validation to received arguments
+        assert length >= 0, f"Password length can't be negative"
+        assert min_len >= 0, f"Password minimal length can't be negative"
+        assert min_len <= length, f"Password minimal length can't be grater than password length"
+        assert len(have_uppercase) <= 1 and have_uppercase == "y" or have_uppercase == "n", f"Only y or n"
+        assert len(have_num) <= 1, f"Only y or n"
+        assert len(have_special_character) <= 1, f"Only y or n"
 
-    def pwd_requirements(self, have_uppercase: str, have_num: str, have_special_character: str, result: str):
+
+        # Assign to self obejct
+        self.result = result
+        self.length =  length
+        self.min_length = min_len
+        self.have_uppercase = have_uppercase
+        self.have_num = have_num
+        self.have_special_character = have_special_character
+
+    def pwd_requirements(self):
         self.result = self.letters
         if self.have_uppercase == "n" or self.have_uppercase =="N":
             self.result = self.result.lower()        
@@ -29,9 +35,9 @@ class Password:
             self.result += self.special_characters
         return self.result
     
-#    def pwd_creator(self, length, result):
-#        pass
-
+    def pwd_creator(self):
+        password = "".join(random.sample(self.pwd_requirements(), self.length))
+        return print(password)
         
 
 
@@ -46,4 +52,5 @@ pwd_special_character = input("Do the password need to contain special character
 
 pwd1 = Password(pwd_len, pwd_min_len, pwd_upper, pwd_digit, pwd_special_character, "")
 
-print(pwd1.special_characters)
+pwd1.pwd_creator()
+#print(pwd1.special_characters)
