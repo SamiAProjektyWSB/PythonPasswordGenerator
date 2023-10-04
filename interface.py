@@ -2,6 +2,7 @@ import customtkinter
 from tkinter import *
 from main import *
 import tkinter
+import pyperclip
 
 
 customtkinter.set_appearance_mode("system")
@@ -15,6 +16,10 @@ string_var = StringVar()
 def button_down():
     wynik = pwd1.pwd_creator()
     string_var.set(str(pwd1.password))
+
+def copy_to_clipboard():
+    copied_pwd = string_var.get()
+    pyperclip.copy(copied_pwd)
     
 
 #rama
@@ -47,7 +52,8 @@ label2 = customtkinter.CTkLabel(master=frame, text="Result:")
 label2.pack(pady=12, padx=10)
 pwd = customtkinter.CTkLabel(master=frame, text="n", width=120, fg_color=("white", "black"), textvariable = string_var)
 pwd.pack(pady=12, padx=10)
-
+button = customtkinter.CTkButton(master=frame, text="Copy", command=copy_to_clipboard)
+button.pack(pady=12, padx=10)
 
 
 app.mainloop()
